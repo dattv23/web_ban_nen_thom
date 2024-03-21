@@ -1,0 +1,45 @@
+﻿@model Model.EntityFramework.product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h2 mb-2 text-gray-800">Delete category</h1>
+
+    <div class="">
+        @using (Html.BeginForm("Delete", "Product", FormMethod.Post, new { id = "deleteForm" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+            <div class="form-group">
+                <label for="Status" class="text-dark font-weight-bold">Select category:</label>
+                @Html.DropDownList("id", ViewBag.product_id as SelectList, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Delete Product</button>
+            <hr>
+            @Html.ActionLink("Cancel", "Index", "Home", new { area = "Admin" }, new { @class = "btn btn-secondary btn-block" })
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Attach a click event to the delete button
+            $('#deleteForm').submit(function (e) {
+                // Prevent the form from submitting automatically
+                e.preventDefault();
+
+                // Show a confirmation dialog
+                if (confirm('Are you sure you want to delete this category?')) {
+                    // If the user clicks OK, submit the form
+                    $(this).unbind('submit').submit();
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,75 @@
+﻿@model Model.EntityFramework.product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h2 mb-2 text-gray-800">Add a new product</h1>
+
+    <div class="">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextBoxFor(model => model.name, new { @class = "form-control", @placeholder = "Enter Product Name...", @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextAreaFor(model => model.description, new { @class = "form-control", @placeholder = "Enter Product Description..." })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextBoxFor(model => model.price, new { @class = "form-control", @placeholder = "Enter Product Price...", @type = "number", @step = "0.01" })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextBoxFor(model => model.image, new { @class = "form-control", @placeholder = "Enter Image URL..." })
+                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.category_id, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.DropDownListFor(model => model.category_id, ViewBag.CategoryList as SelectList, "Select Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.discount_id, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.DropDownListFor(model => model.discount_id, ViewBag.DiscountList as SelectList, "Select Discount", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.discount_id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextBoxFor(model => model.quantity, new { @class = "form-control", @placeholder = "Enter Quantity...", @type = "number" })
+                @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                <div style="display: flexbox;">
+                    @Html.CheckBoxFor(model => model.status)
+                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                    <span>Active</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Create Product</button>
+            <hr>
+            @Html.ActionLink("Cancel", "Index", "Home", new { area = "Admin" }, new { @class = "btn btn-secondary btn-block" })
+        }
+    </div>
+</div>

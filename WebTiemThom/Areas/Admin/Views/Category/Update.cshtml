@@ -1,0 +1,56 @@
+﻿@model Model.EntityFramework.category
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h2 mb-2 text-gray-800">Update category</h1>
+
+    <div class="">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+
+            <div class="form-group">
+                <label for="Status" class="text-dark font-weight-bold">Select category:</label>
+                @Html.DropDownList("id", ViewBag.CategoryID as SelectList, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextBoxFor(model => model.name, new { @class = "form-control", @placeholder = "Enter Category Name...", @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.parent_id, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextBoxFor(model => model.parent_id, new { @class = "form-control", @placeholder = "Enter Parent Category ID...", @type = "number" })
+                @Html.ValidationMessageFor(model => model.parent_id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.order, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                @Html.TextBoxFor(model => model.order, new { @class = "form-control", @placeholder = "Enter Order...", @type = "number" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                <div style="display: flexbox;">
+                    @Html.CheckBoxFor(model => model.status)
+                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                    <span>Active</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Update Category</button>
+            <hr>
+            @Html.ActionLink("Cancel", "Index", "Home", new { area = "Admin" }, new { @class = "btn btn-secondary btn-block" })
+        }
+    </div>
+
+</div>

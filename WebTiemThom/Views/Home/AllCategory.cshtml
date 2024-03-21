@@ -1,0 +1,9 @@
+﻿@model List<Model.EntityFramework.category>
+
+<ul class="main-category">
+    @foreach (var item in Model)
+    {
+        string metaTitle = string.Join("-", item.name.ToLower().Split(' '));
+        <li><a href="/@metaTitle">@item.name</a></li>
+    }
+</ul>

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h2>Order Confirmation</h2>
+    <p>Thank you, {{CustomerName}}, for placing an order with our store. Below is the detailed information about your order:</p>
+
+    <p><strong>Contact Information:</strong></p>
+    <ul>
+        <li><strong>Phone:</strong> {{Phone}}</li>
+        <li><strong>Email:</strong> {{Email}}</li>
+        <li><strong>Address:</strong> {{Address}}</li>
+    </ul>
+
+    <p><strong>Total:</strong> {{Total}}</p>
+
+    <p>Please review your information. We will contact you shortly to confirm your order and provide information about the delivery process.</p>
+
+    <p>We appreciate your choice and look forward to serving you again.</p>
+
+    <p>
+        Best regards,<br />
+        Store Name
+    </p>
+</body>
+</html>

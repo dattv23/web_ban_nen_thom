@@ -1,0 +1,79 @@
+﻿@model List<WebTiemThom.Models.CartItem>
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    long totalAmount = 0;
+}
+
+<!-- Shopping Cart -->
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>PRODUCT</th>
+                            <th>NAME</th>
+                            <th class="text-center">UNIT PRICE</th>
+                            <th class="text-center">QUANTITY</th>
+                            <th class="text-center">TOTAL</th>
+                            <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="image" data-title="No"><img src="@item.Product.image" width="100" height="100" alt="#"></td>
+                                <td class="product-des" data-title="Description">
+                                    <p class="product-name"><a href="#">@item.Product.name</a></p>
+                                </td>
+                                <td class="price" data-title="Price"><span>@item.Product.price vnđ </span></td>
+                                <td class="qty" data-title="Qty">
+                                    <!-- Input Order -->
+                                    <div class="input-group">
+                                        <input class="txtQuantity" disabled data-id="@item.Product.id" style="text-align: center;" data-min="1" data-max="100" value="@item.Quantity">
+                                    </div>
+                                    <!--/ End Input Order -->
+                                </td>
+                                <td class="total-amount" data-title="Total"><span>@((item.Product.price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) vnđ</span></td>
+                                <td class="action" data-title="Remove"><button class="btn-delete" data-id="@item.Product.id"><i class="ti-trash remove-icon"></i></button></td>
+                                @{ totalAmount += ((long)item.Product.price.GetValueOrDefault(0) * item.Quantity); }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!--/ End Shopping Summery -->
+            </div>
+        </div>
+    </div>
+    <!--/ End Shopping Cart -->
+</div>
+<div class="checkout-form" style="padding: 40px 121px;">
+    <h2>Make Your Checkout Here</h2>
+    <p>Please register in order to checkout more quickly</p>
+    <!-- Form -->
+    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label class="text-dark font-weight-bold">Name<span>*</span></label>
+            <input type="text" name="shipName" placeholder="" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="text-dark font-weight-bold">Phone<span>*</span></label>
+            <input type="text" name="mobile" placeholder="" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="text-dark font-weight-bold">Address<span>*</span></label>
+            <input type="text" name="address" placeholder="" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="text-dark font-weight-bold">Email<span>*</span></label>
+            <input type="text" name="email" placeholder="" required="required" class="form-control">
+        </div>
+        <button type="submit" class="btn">Submit order</button>
+    }
+    <!--/ End Form -->
+</div>
